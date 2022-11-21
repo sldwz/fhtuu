@@ -12,9 +12,9 @@
 
 
 ## 如何使用？
-1.fork仓库
-2.生成Github pages
-3.然后即可使用
+- fork仓库
+- 生成Github pages
+- 然后即可使用
 
 适用场景
 
