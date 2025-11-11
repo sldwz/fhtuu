@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>安全验证 - 请使用浏览器打开</title>
+    <title>请使用浏览器打开</title>
     <style>
         * {
             margin: 0;
@@ -13,139 +13,147 @@
         }
         
         body {
-            background-color: #f0f9f0;
-            color: #333;
-            line-height: 1.6;
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
         }
         
         .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        .header {
+            max-width: 500px;
+            width: 100%;
             text-align: center;
-            margin-bottom: 30px;
-            padding: 20px;
-            background: linear-gradient(135deg, #4CAF50, #2E7D32);
-            border-radius: 12px;
-            color: white;
-            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
         }
         
-        .header h1 {
+        .logo {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
             font-size: 24px;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            font-weight: 600;
         }
         
-        .header p {
+        p {
             font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 25px;
             opacity: 0.9;
         }
         
-        .card {
-            background: white;
+        .guide-box {
+            background: rgba(255, 255, 255, 0.15);
             border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            border-left: 5px solid #4CAF50;
+            padding: 20px;
+            margin: 25px 0;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
         
-        .card h2 {
-            color: #2E7D32;
+        .guide-box h2 {
+            font-size: 18px;
             margin-bottom: 15px;
-            font-size: 20px;
-        }
-        
-        .card p {
-            margin-bottom: 15px;
-            color: #555;
-        }
-        
-        .wechat-tip {
-            background-color: #e8f5e9;
-            border: 1px solid #c8e6c9;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 20px 0;
             display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .guide-box h2 .icon {
+            margin-right: 8px;
+        }
+        
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            text-align: left;
+        }
+        
+        .step {
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .step-number {
+            background: white;
+            color: #2E7D32;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+        
+        .browsers {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .browser {
+            display: flex;
+            flex-direction: column;
             align-items: center;
         }
         
-        .wechat-tip .icon {
-            font-size: 24px;
-            margin-right: 15px;
-            color: #4CAF50;
-        }
-        
-        .id-form {
-            margin: 25px 0;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
+        .browser-icon {
+            font-size: 32px;
             margin-bottom: 8px;
-            font-weight: 600;
-            color: #2E7D32;
         }
         
-        .form-group input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #c8e6c9;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: all 0.3s;
-        }
-        
-        .form-group input:focus {
-            border-color: #4CAF50;
-            box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
-            outline: none;
+        .browser-name {
+            font-size: 14px;
         }
         
         .btn {
             display: inline-block;
-            background: linear-gradient(135deg, #4CAF50, #2E7D32);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 8px;
-            font-size: 16px;
+            background: white;
+            color: #2E7D32;
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 30px;
             font-weight: 600;
-            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
             transition: all 0.3s;
-            text-align: center;
-            width: 100%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
         
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
         }
         
-        .browser-guide {
-            display: flex;
-            justify-content: space-between;
+        .loading {
             margin-top: 30px;
+            font-size: 14px;
+            opacity: 0.8;
         }
         
-        .browser-item {
-            text-align: center;
-            flex: 1;
-            padding: 15px;
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 8px;
+            vertical-align: middle;
         }
         
-        .browser-icon {
-            font-size: 36px;
-            margin-bottom: 10px;
-            color: #4CAF50;
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
         
         .hidden {
@@ -153,217 +161,85 @@
         }
         
         .error-message {
-            color: #f44336;
-            margin-top: 10px;
-            text-align: center;
-            font-weight: 500;
-            padding: 15px;
-            background-color: #ffebee;
+            background: rgba(244, 67, 54, 0.2);
+            border: 1px solid rgba(244, 67, 54, 0.5);
             border-radius: 8px;
-            border-left: 4px solid #f44336;
-        }
-        
-        .success-message {
-            color: #4CAF50;
-            margin-top: 10px;
-            text-align: center;
-            font-weight: 500;
             padding: 15px;
-            background-color: #e8f5e9;
-            border-radius: 8px;
-            border-left: 4px solid #4CAF50;
-        }
-        
-        .footer {
-            text-align: center;
-            margin-top: 40px;
-            padding: 20px;
-            color: #666;
-            font-size: 14px;
-        }
-        
-        .content-area {
-            margin-top: 30px;
-        }
-        
-        .blog-content {
-            background: white;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        }
-        
-        .blog-content h2 {
-            color: #2E7D32;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #e0e0e0;
-        }
-        
-        .blog-post {
-            margin-bottom: 25px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #f0f0f0;
-        }
-        
-        .blog-post:last-child {
-            border-bottom: none;
-        }
-        
-        .blog-post h3 {
-            color: #333;
-            margin-bottom: 10px;
-        }
-        
-        .blog-post p {
-            color: #666;
-            line-height: 1.7;
-        }
-        
-        .blog-post .date {
-            color: #888;
-            font-size: 14px;
-            margin-top: 10px;
-        }
-        
-        .direct-link {
-            text-align: center;
             margin: 20px 0;
-        }
-        
-        .direct-link a {
-            display: inline-block;
-            background: linear-gradient(135deg, #4CAF50, #2E7D32);
-            color: white;
-            text-decoration: none;
-            padding: 12px 25px;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-        
-        .direct-link a:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+            text-align: center;
         }
         
         .url-display {
-            background-color: #e8f5e9;
-            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 8px;
+            padding: 12px;
             margin: 15px 0;
             font-family: monospace;
             word-break: break-all;
-            border-left: 4px solid #4CAF50;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>安全验证</h1>
-            <p>请完成验证后使用浏览器访问</p>
+        <div class="logo">🌐</div>
+        <h1>请使用浏览器打开</h1>
+        <p>检测到您在微信/QQ内打开，部分功能受限</p>
+        
+        <div id="errorMessage" class="error-message hidden">
+            <!-- 错误信息将在这里显示 -->
         </div>
         
-        <div class="card">
-            <h2>访问提示</h2>
-            <p>检测到您正在微信/QQ中浏览此页面，部分功能可能受限。为了更好的体验，请使用浏览器打开。</p>
-            
-            <div class="wechat-tip">
-                <div class="icon">⚠️</div>
-                <div>
-                    <strong>微信/QQ用户请注意</strong>
-                    <p>点击右上角菜单，选择"在浏览器中打开"以获得完整功能。</p>
+        <div class="guide-box">
+            <h2><span class="icon">⚠️</span> 操作指引</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div>点击右上角 <strong>···</strong> 菜单按钮</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div>选择 <strong>"在浏览器打开"</strong> 选项</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div>在浏览器中继续访问目标页面</div>
                 </div>
             </div>
-        </div>
-        
-        <div class="card">
-            <h2>安全验证</h2>
-            <p>请使用正确的URL参数访问此页面</p>
             
             <div class="url-display">
-                正确URL格式: <span id="correctUrl"></span>
-            </div>
-            
-            <div id="verificationResult">
-                <!-- 验证结果将在这里显示 -->
-            </div>
-            
-            <div class="direct-link">
-                <a href="DWZ.HTML?id=3596" id="correctLink">使用正确参数访问</a>
+                正确URL: <span id="correctUrl"></span>
             </div>
         </div>
         
-        <div class="browser-guide">
-            <div class="browser-item">
+        <div class="browsers">
+            <div class="browser">
                 <div class="browser-icon">🌐</div>
-                <h3>Chrome</h3>
-                <p>推荐使用</p>
+                <div class="browser-name">Chrome</div>
             </div>
-            <div class="browser-item">
+            <div class="browser">
                 <div class="browser-icon">🔍</div>
-                <h3>Safari</h3>
-                <p>苹果用户</p>
+                <div class="browser-name">Safari</div>
             </div>
-            <div class="browser-item">
+            <div class="browser">
                 <div class="browser-icon">🦊</div>
-                <h3>Firefox</h3>
-                <p>安全可靠</p>
+                <div class="browser-name">Firefox</div>
             </div>
         </div>
         
-        <div id="contentArea" class="content-area hidden">
-            <div class="blog-content">
-                <h2>技术博客</h2>
-                
-                <div class="blog-post">
-                    <h3>前端开发趋势2023</h3>
-                    <p>随着技术的不断发展，前端开发领域也在快速变化。2023年，我们看到了一些明显的趋势，包括Web Components的普及、TypeScript的持续增长，以及AI在前端开发中的应用。</p>
-                    <p class="date">发布于：2023年10月15日</p>
-                </div>
-                
-                <div class="blog-post">
-                    <h3>绿色设计原则</h3>
-                    <p>绿色设计不仅仅是一种颜色选择，它代表了一种可持续和环保的设计理念。在数字产品设计中，我们可以通过优化性能、减少数据使用和选择环保的托管解决方案来实践绿色设计。</p>
-                    <p class="date">发布于：2023年10月10日</p>
-                </div>
-                
-                <div class="blog-post">
-                    <h3>响应式布局最佳实践</h3>
-                    <p>在移动设备普及的今天，响应式设计已成为网站开发的标准。本文将介绍一些实用的响应式布局技巧，帮助您创建在各种设备上都能完美展示的网站。</p>
-                    <p class="date">发布于：2023年10月5日</p>
-                </div>
-                
-                <div class="blog-post">
-                    <h3>JavaScript性能优化</h3>
-                    <p>JavaScript是Web应用的核心，但其性能问题常常被忽视。本文探讨了常见的JavaScript性能瓶颈以及如何通过代码分割、懒加载和内存管理来优化性能。</p>
-                    <p class="date">发布于：2023年9月28日</p>
-                </div>
-                
-                <div class="direct-link">
-                    <a href="https://2080.aff4.xyz/dkJLN7" target="_blank">前往目标页面</a>
-                </div>
-            </div>
-        </div>
+        <a href="#" class="btn" id="directLink">使用正确参数访问</a>
         
-        <div class="footer">
-            <p>© 2023 技术博客 | 安全访问验证系统</p>
+        <div class="loading" id="loadingMessage">
+            <span class="spinner"></span>检测浏览器环境和参数...
         </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const verificationResult = document.getElementById('verificationResult');
-            const contentArea = document.getElementById('contentArea');
+            const loadingMessage = document.getElementById('loadingMessage');
+            const directLink = document.getElementById('directLink');
+            const errorMessage = document.getElementById('errorMessage');
             const correctUrl = document.getElementById('correctUrl');
-            const correctLink = document.getElementById('correctLink');
-            
-            // 设置正确URL显示
-            const currentUrl = window.location.href.split('?')[0];
-            const correctUrlString = currentUrl + '?id=3596';
-            correctUrl.textContent = correctUrlString;
-            correctLink.href = correctUrlString;
             
             // 获取URL参数
             function getUrlParameter(name) {
@@ -381,32 +257,49 @@
                 return ua.indexOf('micromessenger') !== -1 || ua.indexOf('qq/') !== -1;
             }
             
-            // 显示微信/QQ提示
-            if (isWechatOrQQ()) {
-                document.querySelector('.wechat-tip').classList.remove('hidden');
-            }
+            // 设置正确URL
+            const currentUrl = window.location.href.split('?')[0];
+            const correctUrlString = currentUrl + '?id=3596';
+            correctUrl.textContent = correctUrlString;
+            directLink.href = correctUrlString;
             
             // 验证ID参数
             const idParam = getUrlParameter('id');
             
-            if (idParam === '3596') {
-                // 验证成功
-                verificationResult.innerHTML = '<div class="success-message">验证成功！正在显示内容...</div>';
-                
-                // 显示内容区域
+            // 如果不是微信/QQ且参数正确，直接跳转
+            if (!isWechatOrQQ() && idParam === '3596') {
+                loadingMessage.innerHTML = '<span class="spinner"></span>参数验证通过，正在跳转到目标页面...';
                 setTimeout(function() {
-                    contentArea.classList.remove('hidden');
-                    window.scrollTo({
-                        top: contentArea.offsetTop - 20,
-                        behavior: 'smooth'
-                    });
-                }, 1000);
-            } else if (idParam) {
-                // 验证失败
-                verificationResult.innerHTML = '<div class="error-message">验证失败！ID参数不正确，请使用正确的URL访问。</div>';
-            } else {
-                // 没有参数
-                verificationResult.innerHTML = '<div class="error-message">未检测到ID参数，请使用正确的URL格式访问。</div>';
+                    window.location.href = 'https://2080.aff4.xyz/dkJLN7';
+                }, 1500);
+            } 
+            // 在微信/QQ中，显示引导信息
+            else if (isWechatOrQQ()) {
+                if (idParam === '3596') {
+                    loadingMessage.textContent = '参数正确！请在浏览器中打开以继续访问';
+                } else if (idParam) {
+                    errorMessage.innerHTML = '参数错误！请使用正确的ID参数访问';
+                    errorMessage.classList.remove('hidden');
+                    loadingMessage.textContent = '检测到参数错误，请使用正确URL';
+                } else {
+                    errorMessage.innerHTML = '缺少参数！请使用带ID参数的URL访问';
+                    errorMessage.classList.remove('hidden');
+                    loadingMessage.textContent = '检测到缺少参数，请使用正确URL';
+                }
+                directLink.style.display = 'inline-block';
+            }
+            // 在浏览器中但参数错误
+            else {
+                if (idParam && idParam !== '3596') {
+                    errorMessage.innerHTML = '参数错误！请使用正确的ID参数访问';
+                    errorMessage.classList.remove('hidden');
+                    loadingMessage.textContent = '检测到参数错误，请使用正确URL';
+                } else {
+                    errorMessage.innerHTML = '缺少参数！请使用带ID参数的URL访问';
+                    errorMessage.classList.remove('hidden');
+                    loadingMessage.textContent = '检测到缺少参数，请使用正确URL';
+                }
+                directLink.style.display = 'inline-block';
             }
         });
     </script>
