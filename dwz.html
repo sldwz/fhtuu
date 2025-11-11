@@ -168,16 +168,6 @@
             margin: 20px 0;
             text-align: center;
         }
-        
-        .url-display {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            padding: 12px;
-            margin: 15px 0;
-            font-family: monospace;
-            word-break: break-all;
-            font-size: 14px;
-        }
     </style>
 </head>
 <body>
@@ -206,10 +196,6 @@
                     <div>在浏览器中继续访问目标页面</div>
                 </div>
             </div>
-            
-            <div class="url-display">
-                正确URL: <span id="correctUrl"></span>
-            </div>
         </div>
         
         <div class="browsers">
@@ -227,28 +213,20 @@
             </div>
         </div>
         
-        <a href="#" class="btn" id="directLink">使用正确参数访问</a>
-        
         <div class="loading" id="loadingMessage">
-            <span class="spinner"></span>检测浏览器环境和参数...
+            <span class="spinner"></span>检测浏览器环境...
         </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const loadingMessage = document.getElementById('loadingMessage');
-            const directLink = document.getElementById('directLink');
             const errorMessage = document.getElementById('errorMessage');
-            const correctUrl = document.getElementById('correctUrl');
             
             // 获取URL参数
             function getUrlParameter(name) {
-                name = name.replace(/[\[\]]/g, '\\$&');
-                const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
-                const results = regex.exec(window.location.href);
-                if (!results) return null;
-                if (!results[2]) return '';
-                return decodeURIComponent(results[2].replace(/\+/g, ' '));
+                const urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get(name);
             }
             
             // 检测是否在微信/QQ中打开
@@ -257,49 +235,27 @@
                 return ua.indexOf('micromessenger') !== -1 || ua.indexOf('qq/') !== -1;
             }
             
-            // 设置正确URL
-            const currentUrl = window.location.href.split('?')[0];
-            const correctUrlString = currentUrl + '?id=3596';
-            correctUrl.textContent = correctUrlString;
-            directLink.href = correctUrlString;
-            
             // 验证ID参数
             const idParam = getUrlParameter('id');
             
-            // 如果不是微信/QQ且参数正确，直接跳转
-            if (!isWechatOrQQ() && idParam === '3596') {
-                loadingMessage.innerHTML = '<span class="spinner"></span>参数验证通过，正在跳转到目标页面...';
+            // 如果在微信/QQ中，显示引导信息
+            if (isWechatOrQQ()) {
+                loadingMessage.textContent = '检测到您在微信/QQ中，请使用浏览器打开';
+                return;
+            }
+            
+            // 如果在浏览器中，验证参数
+            if (idParam === '5687') {
+                // 参数正确，直接跳转
+                loadingMessage.innerHTML = '<span class="spinner"></span>正在跳转到目标页面...';
                 setTimeout(function() {
                     window.location.href = 'https://2080.aff4.xyz/dkJLN7';
                 }, 1500);
-            } 
-            // 在微信/QQ中，显示引导信息
-            else if (isWechatOrQQ()) {
-                if (idParam === '3596') {
-                    loadingMessage.textContent = '参数正确！请在浏览器中打开以继续访问';
-                } else if (idParam) {
-                    errorMessage.innerHTML = '参数错误！请使用正确的ID参数访问';
-                    errorMessage.classList.remove('hidden');
-                    loadingMessage.textContent = '检测到参数错误，请使用正确URL';
-                } else {
-                    errorMessage.innerHTML = '缺少参数！请使用带ID参数的URL访问';
-                    errorMessage.classList.remove('hidden');
-                    loadingMessage.textContent = '检测到缺少参数，请使用正确URL';
-                }
-                directLink.style.display = 'inline-block';
-            }
-            // 在浏览器中但参数错误
-            else {
-                if (idParam && idParam !== '3596') {
-                    errorMessage.innerHTML = '参数错误！请使用正确的ID参数访问';
-                    errorMessage.classList.remove('hidden');
-                    loadingMessage.textContent = '检测到参数错误，请使用正确URL';
-                } else {
-                    errorMessage.innerHTML = '缺少参数！请使用带ID参数的URL访问';
-                    errorMessage.classList.remove('hidden');
-                    loadingMessage.textContent = '检测到缺少参数，请使用正确URL';
-                }
-                directLink.style.display = 'inline-block';
+            } else {
+                // 参数错误或缺失
+                errorMessage.innerHTML = '参数错误！请使用正确的ID参数访问';
+                errorMessage.classList.remove('hidden');
+                loadingMessage.textContent = '检测到参数错误，无法跳转';
             }
         });
     </script>
