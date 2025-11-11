@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>安全验证 - 请使用浏览器打开</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background-color: #f0f9f0;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            border-radius: 12px;
+            color: white;
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid #4CAF50;
+        }
+        
+        .card h2 {
+            color: #2E7D32;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        
+        .card p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+        
+        .wechat-tip {
+            background-color: #e8f5e9;
+            border: 1px solid #c8e6c9;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .wechat-tip .icon {
+            font-size: 24px;
+            margin-right: 15px;
+            color: #4CAF50;
+        }
+        
+        .id-form {
+            margin: 25px 0;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2E7D32;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #c8e6c9;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .form-group input:focus {
+            border-color: #4CAF50;
+            box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+            outline: none;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+        }
+        
+        .browser-guide {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        .browser-item {
+            text-align: center;
+            flex: 1;
+            padding: 15px;
+        }
+        
+        .browser-icon {
+            font-size: 36px;
+            margin-bottom: 10px;
+            color: #4CAF50;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .error-message {
+            color: #f44336;
+            margin-top: 10px;
+            text-align: center;
+            font-weight: 500;
+            padding: 15px;
+            background-color: #ffebee;
+            border-radius: 8px;
+            border-left: 4px solid #f44336;
+        }
+        
+        .success-message {
+            color: #4CAF50;
+            margin-top: 10px;
+            text-align: center;
+            font-weight: 500;
+            padding: 15px;
+            background-color: #e8f5e9;
+            border-radius: 8px;
+            border-left: 4px solid #4CAF50;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .content-area {
+            margin-top: 30px;
+        }
+        
+        .blog-content {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        .blog-content h2 {
+            color: #2E7D32;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .blog-post {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .blog-post:last-child {
+            border-bottom: none;
+        }
+        
+        .blog-post h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .blog-post p {
+            color: #666;
+            line-height: 1.7;
+        }
+        
+        .blog-post .date {
+            color: #888;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        
+        .direct-link {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .direct-link a {
+            display: inline-block;
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .direct-link a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+        }
+        
+        .url-display {
+            background-color: #e8f5e9;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: monospace;
+            word-break: break-all;
+            border-left: 4px solid #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>安全验证</h1>
+            <p>请完成验证后使用浏览器访问</p>
+        </div>
+        
+        <div class="card">
+            <h2>访问提示</h2>
+            <p>检测到您正在微信/QQ中浏览此页面，部分功能可能受限。为了更好的体验，请使用浏览器打开。</p>
+            
+            <div class="wechat-tip">
+                <div class="icon">⚠️</div>
+                <div>
+                    <strong>微信/QQ用户请注意</strong>
+                    <p>点击右上角菜单，选择"在浏览器中打开"以获得完整功能。</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>安全验证</h2>
+            <p>请使用正确的URL参数访问此页面</p>
+            
+            <div class="url-display">
+                正确URL格式: <span id="correctUrl"></span>
+            </div>
+            
+            <div id="verificationResult">
+                <!-- 验证结果将在这里显示 -->
+            </div>
+            
+            <div class="direct-link">
+                <a href="DWZ.HTML?id=3596" id="correctLink">使用正确参数访问</a>
+            </div>
+        </div>
+        
+        <div class="browser-guide">
+            <div class="browser-item">
+                <div class="browser-icon">🌐</div>
+                <h3>Chrome</h3>
+                <p>推荐使用</p>
+            </div>
+            <div class="browser-item">
+                <div class="browser-icon">🔍</div>
+                <h3>Safari</h3>
+                <p>苹果用户</p>
+            </div>
+            <div class="browser-item">
+                <div class="browser-icon">🦊</div>
+                <h3>Firefox</h3>
+                <p>安全可靠</p>
+            </div>
+        </div>
+        
+        <div id="contentArea" class="content-area hidden">
+            <div class="blog-content">
+                <h2>技术博客</h2>
+                
+                <div class="blog-post">
+                    <h3>前端开发趋势2023</h3>
+                    <p>随着技术的不断发展，前端开发领域也在快速变化。2023年，我们看到了一些明显的趋势，包括Web Components的普及、TypeScript的持续增长，以及AI在前端开发中的应用。</p>
+                    <p class="date">发布于：2023年10月15日</p>
+                </div>
+                
+                <div class="blog-post">
+                    <h3>绿色设计原则</h3>
+                    <p>绿色设计不仅仅是一种颜色选择，它代表了一种可持续和环保的设计理念。在数字产品设计中，我们可以通过优化性能、减少数据使用和选择环保的托管解决方案来实践绿色设计。</p>
+                    <p class="date">发布于：2023年10月10日</p>
+                </div>
+                
+                <div class="blog-post">
+                    <h3>响应式布局最佳实践</h3>
+                    <p>在移动设备普及的今天，响应式设计已成为网站开发的标准。本文将介绍一些实用的响应式布局技巧，帮助您创建在各种设备上都能完美展示的网站。</p>
+                    <p class="date">发布于：2023年10月5日</p>
+                </div>
+                
+                <div class="blog-post">
+                    <h3>JavaScript性能优化</h3>
+                    <p>JavaScript是Web应用的核心，但其性能问题常常被忽视。本文探讨了常见的JavaScript性能瓶颈以及如何通过代码分割、懒加载和内存管理来优化性能。</p>
+                    <p class="date">发布于：2023年9月28日</p>
+                </div>
+                
+                <div class="direct-link">
+                    <a href="https://2080.aff4.xyz/dkJLN7" target="_blank">前往目标页面</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>© 2023 技术博客 | 安全访问验证系统</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const verificationResult = document.getElementById('verificationResult');
+            const contentArea = document.getElementById('contentArea');
+            const correctUrl = document.getElementById('correctUrl');
+            const correctLink = document.getElementById('correctLink');
+            
+            // 设置正确URL显示
+            const currentUrl = window.location.href.split('?')[0];
+            const correctUrlString = currentUrl + '?id=3596';
+            correctUrl.textContent = correctUrlString;
+            correctLink.href = correctUrlString;
+            
+            // 获取URL参数
+            function getUrlParameter(name) {
+                name = name.replace(/[\[\]]/g, '\\$&');
+                const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+                const results = regex.exec(window.location.href);
+                if (!results) return null;
+                if (!results[2]) return '';
+                return decodeURIComponent(results[2].replace(/\+/g, ' '));
+            }
+            
+            // 检测是否在微信/QQ中打开
+            function isWechatOrQQ() {
+                const ua = navigator.userAgent.toLowerCase();
+                return ua.indexOf('micromessenger') !== -1 || ua.indexOf('qq/') !== -1;
+            }
+            
+            // 显示微信/QQ提示
+            if (isWechatOrQQ()) {
+                document.querySelector('.wechat-tip').classList.remove('hidden');
+            }
+            
+            // 验证ID参数
+            const idParam = getUrlParameter('id');
+            
+            if (idParam === '3596') {
+                // 验证成功
+                verificationResult.innerHTML = '<div class="success-message">验证成功！正在显示内容...</div>';
+                
+                // 显示内容区域
+                setTimeout(function() {
+                    contentArea.classList.remove('hidden');
+                    window.scrollTo({
+                        top: contentArea.offsetTop - 20,
+                        behavior: 'smooth'
+                    });
+                }, 1000);
+            } else if (idParam) {
+                // 验证失败
+                verificationResult.innerHTML = '<div class="error-message">验证失败！ID参数不正确，请使用正确的URL访问。</div>';
+            } else {
+                // 没有参数
+                verificationResult.innerHTML = '<div class="error-message">未检测到ID参数，请使用正确的URL格式访问。</div>';
+            }
+        });
+    </script>
+</body>
+</html>
